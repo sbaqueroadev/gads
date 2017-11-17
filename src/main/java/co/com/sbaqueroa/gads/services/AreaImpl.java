@@ -15,7 +15,7 @@ import co.com.sbaqueroa.gads.model.implementation.Area;
 
 /**
  * @author sergio
- * Bee Smart S.A.S.
+ * .
  *
  */
 @Service

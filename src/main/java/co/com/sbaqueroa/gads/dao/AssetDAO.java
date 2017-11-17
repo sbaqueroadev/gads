@@ -9,7 +9,7 @@ import co.com.sbaqueroa.gads.model.implementation.Asset;
 
 /**
  * @author sergio
- * Bee Smart S.A.S.
+ * .
  *
  */
 public interface AssetDAO {

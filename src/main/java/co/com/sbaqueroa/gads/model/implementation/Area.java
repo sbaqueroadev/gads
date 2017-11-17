@@ -3,19 +3,27 @@
  */
 package co.com.sbaqueroa.gads.model.implementation;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * @author sergio
- * Bee Smart S.A.S.
+ * .
  *
  */
+@Entity
+@Table(name="area")
 public class Area {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -26,6 +34,8 @@ public class Area {
 	@OneToOne(cascade=CascadeType.ALL,targetEntity=City.class)
 	@JoinColumn(name="city_id",columnDefinition="INT(11)",nullable=false)
 	private City city;
+	@OneToMany(mappedBy="area",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+    private Set<AssignedAsset> assignedAssets;
 	/**
 	 * 
 	 */

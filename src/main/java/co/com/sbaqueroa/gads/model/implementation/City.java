@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 /**
  * @author sergio
- * Bee Smart S.A.S.
+ * .
  *
  */
 @Entity

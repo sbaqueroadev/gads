@@ -5,16 +5,20 @@ package co.com.sbaqueroa.gads.model.implementation;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  * @author sergio
- * Bee Smart S.A.S.
+ * .
  *
  */
 @Entity
@@ -51,6 +55,10 @@ public class Asset {
 	private Date buyDate;
 	@Column(name="withdrawal_date",columnDefinition="DATE")
 	private Date withdrawalDate;
+	
+	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY, optional = true)
+	private AssignedAsset assignedAsset;
 	
 	/**
 	 * 
@@ -225,6 +233,18 @@ public class Asset {
 	 */
 	public void setWithdrawalDate(Date withdrawalDate) {
 		this.withdrawalDate = withdrawalDate;
+	}
+	/**
+	 * @return the assignedAsset
+	 */
+	public AssignedAsset getAssignedAsset() {
+		return assignedAsset;
+	}
+	/**
+	 * @param assignedAsset the assignedAsset to set
+	 */
+	public void setAssignedAsset(AssignedAsset assignedAsset) {
+		this.assignedAsset = assignedAsset;
 	}
 	
 	

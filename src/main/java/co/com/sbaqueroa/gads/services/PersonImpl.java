@@ -15,7 +15,7 @@ import co.com.sbaqueroa.gads.model.implementation.Person;
 
 /**
  * @author sergio
- * Bee Smart S.A.S.
+ * .
  *
  */
 @Service

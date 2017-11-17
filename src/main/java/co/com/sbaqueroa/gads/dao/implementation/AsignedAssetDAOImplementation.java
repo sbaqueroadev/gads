@@ -13,8 +13,8 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import co.com.sbaqueroa.gads.dao.PersonDAO;
-import co.com.sbaqueroa.gads.model.implementation.Person;
+import co.com.sbaqueroa.gads.dao.AssignedAssetDAO;
+import co.com.sbaqueroa.gads.model.implementation.AssignedAsset;
 
 /**
  * @author sergio
@@ -22,19 +22,20 @@ import co.com.sbaqueroa.gads.model.implementation.Person;
  *
  */
 @Repository
-public class PersonDAOImplementetation implements PersonDAO {
+public class AsignedAssetDAOImplementation implements AssignedAssetDAO {
 
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
 	/* (non-Javadoc)
-	 * @see co.com.sbaqueroa.gdas.dao.PersonDAO#getAll()
+	 * @see co.com.sbaqueroa.gdas.dao.AssetDAO#getAll()
 	 */
 	@Override
-	public List<Person> getAll() throws Exception {
+	public List<AssignedAsset> getAll() throws Exception {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-	    CriteriaQuery<Person> cq = builder.createQuery(Person.class);
-	    Root<Person> root = cq.from(Person.class);
+	    CriteriaQuery<AssignedAsset> cq = builder.createQuery(AssignedAsset.class);
+	    Root<AssignedAsset> root = cq.from(AssignedAsset.class);
 	    cq.select(root);
 	    return entityManager.createQuery(cq).getResultList();
 	}

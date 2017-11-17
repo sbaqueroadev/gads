@@ -3,16 +3,21 @@
  */
 package co.com.sbaqueroa.gads.model.implementation;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  * @author sergio
- * Bee Smart S.A.S.
+ * .
  *
  */
 @Entity
@@ -24,6 +29,9 @@ public class Person {
 	private int id;
 	@Column(name="name",columnDefinition="VARCHAR(45)",nullable=false)
 	private String name;
+	@OneToMany(mappedBy="person",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+    private Set<AssignedAsset> assignedAssets;
+
 	/**
 	 * 
 	 */
@@ -53,5 +61,17 @@ public class Person {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	/**
+	 * @return the assignedAssets
+	 */
+	public Set<AssignedAsset> getAssignedAssets() {
+		return assignedAssets;
+	}
+	/**
+	 * @param assignedAssets the assignedAssets to set
+	 */
+	public void setAssignedAssets(Set<AssignedAsset> assignedAssets) {
+		this.assignedAssets = assignedAssets;
 	}
 }
