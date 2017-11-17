@@ -1,4 +1,4 @@
-package co.com.sbaqueroa.gads.services;
+package co.com.sbaqueroa.gads.webservices;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.com.sbaqueroa.gads.model.implementation.Asset;
+import co.com.sbaqueroa.gads.services.AssetImpl;
 
 /**
  * Handles requests for the application home page.
