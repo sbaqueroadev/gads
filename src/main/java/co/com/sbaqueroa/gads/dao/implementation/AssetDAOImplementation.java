@@ -14,6 +14,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.com.sbaqueroa.gads.dao.AssetDAO;
 import co.com.sbaqueroa.gads.model.implementation.Asset;
@@ -49,11 +50,31 @@ public class AssetDAOImplementation implements AssetDAO {
 	@Override
 	public List<Asset> getAllByFieldValue(String field, String value) throws Exception {
 		List<Asset> assets = new ArrayList<Asset>();
-		Query query = entityManager.createNativeQuery("SELECT * FROM asset WHERE ?1 = '?2'", Asset.class);
-		query.setParameter(1, field);
-		query.setParameter(2, value);
+		Query query = entityManager.createNativeQuery("SELECT * FROM asset WHERE "+field+" = :value", Asset.class);
+		query.setParameter("value", value);
 		assets = query.getResultList();
 		return assets;
+	}
+
+	/* (non-Javadoc)
+	 * @see co.com.sbaqueroa.gads.dao.AssetDAO#insert(co.com.sbaqueroa.gads.model.implementation.Asset)
+	 */
+	@Override
+	@Transactional(readOnly=false)
+	public Asset insert(Asset asset) throws Exception {
+		entityManager.persist(asset);
+		entityManager.flush();
+		return asset;
+	}
+
+	/* (non-Javadoc)
+	 * @see co.com.sbaqueroa.gads.dao.AssetDAO#update(co.com.sbaqueroa.gads.model.implementation.Asset)
+	 */
+	@Override
+	public Asset update(Asset asset) throws Exception {
+		entityManager.refresh(asset);
+		entityManager.flush();
+		return asset;
 	}
 
 }

@@ -15,4 +15,6 @@ import co.com.sbaqueroa.gads.model.implementation.Asset;
 public interface AssetInterface {
 	public List<Asset> getAll();
 	public List<Asset> getAllByFieldValue(String field,String value);
+	public boolean add(Asset asset);
+	public boolean update(Asset asset);
 }

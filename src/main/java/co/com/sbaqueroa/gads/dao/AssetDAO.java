@@ -15,4 +15,6 @@ import co.com.sbaqueroa.gads.model.implementation.Asset;
 public interface AssetDAO {
 	public List<Asset> getAll() throws Exception;
 	public List<Asset> getAllByFieldValue(String field, String value) throws Exception;
+	public Asset insert(Asset asset) throws Exception;
+	public Asset update(Asset asset) throws Exception;
 }

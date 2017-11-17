@@ -51,4 +51,32 @@ public class AssetImpl implements AssetInterface {
 		return new ArrayList<Asset>();
 	}
 
+	/* (non-Javadoc)
+	 * @see co.com.sbaqueroa.gads.model.AssetInterface#add(co.com.sbaqueroa.gads.model.implementation.Asset)
+	 */
+	@Override
+	public boolean add(Asset asset) {
+		try {
+			assetDAO.insert(asset);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see co.com.sbaqueroa.gads.model.AssetInterface#update(co.com.sbaqueroa.gads.model.implementation.Asset)
+	 */
+	@Override
+	public boolean update(Asset asset) {
+		try {
+			assetDAO.update(asset);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 }

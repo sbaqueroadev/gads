@@ -25,15 +25,18 @@ import javax.persistence.Table;
 @Table(name="asset")
 public class Asset {
 
+	public static final String SERIAL_FIELD = "serial";
+	public static final String BUY_DATE_FIELD = "buy_date";
+	public static final String TYPE_FIELD = "type";
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id",nullable=false,updatable=false)
 	private int id;
 	@Column(name="name",columnDefinition="VARCHAR(45)",nullable=false)
 	private String name;
-	@Column(name="type",columnDefinition="VARCHAR(45)",nullable=false)
+	@Column(name=TYPE_FIELD,columnDefinition="VARCHAR(45)",nullable=false)
 	private String type;
-	@Column(name="serial",columnDefinition="VARCHAR(45)",nullable=false)
+	@Column(name=SERIAL_FIELD,columnDefinition="VARCHAR(45)",nullable=false)
 	private String serial;
 	@Column(name="inventory_number",columnDefinition="VARCHAR(45)",nullable=false)
 	private String inventoryNumber;
@@ -51,7 +54,7 @@ public class Asset {
 	private float length;
 	@Column(name="buy_price",columnDefinition="DECIMAL(11,2)",nullable=false)
 	private float buyPrice;
-	@Column(name="buy_date",columnDefinition="DATE",nullable=false)
+	@Column(name=BUY_DATE_FIELD,columnDefinition="DATE",nullable=false)
 	private Date buyDate;
 	@Column(name="withdrawal_date",columnDefinition="DATE")
 	private Date withdrawalDate;
