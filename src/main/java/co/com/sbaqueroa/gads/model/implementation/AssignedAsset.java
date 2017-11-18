@@ -3,6 +3,7 @@
  */
 package co.com.sbaqueroa.gads.model.implementation;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,10 +29,10 @@ public class AssignedAsset{
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "asset_id",nullable=false)
 	private Asset asset;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="person_id", nullable=true)
     private Person person;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="area_id", nullable=true)
     private Area area;
 	

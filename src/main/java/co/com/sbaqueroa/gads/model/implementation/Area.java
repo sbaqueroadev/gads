@@ -3,6 +3,7 @@
  */
 package co.com.sbaqueroa.gads.model.implementation;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -35,7 +36,7 @@ public class Area {
 	@JoinColumn(name="city_id",columnDefinition="INT(11)",nullable=false)
 	private City city;
 	@OneToMany(mappedBy="area",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-    private Set<AssignedAsset> assignedAssets;
+    private Set<AssignedAsset> assignedAssets = new HashSet<AssignedAsset>();
 	/**
 	 * 
 	 */
@@ -66,4 +67,30 @@ public class Area {
 	public void setName(String name) {
 		this.name = name;
 	}
+	/**
+	 * @return the city
+	 */
+	public City getCity() {
+		return city;
+	}
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(City city) {
+		this.city = city;
+	}
+	/**
+	 * @return the assignedAssets
+	 */
+	public Set<AssignedAsset> getAssignedAssets() {
+		return assignedAssets;
+	}
+	/**
+	 * @param assignedAssets the assignedAssets to set
+	 */
+	public void setAssignedAssets(Set<AssignedAsset> assignedAssets) {
+		this.assignedAssets = assignedAssets;
+	}
+	
+	
 }

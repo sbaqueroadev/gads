@@ -3,6 +3,7 @@
  */
 package co.com.sbaqueroa.gads.model.implementation;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,7 +31,7 @@ public class Person {
 	@Column(name="name",columnDefinition="VARCHAR(45)",nullable=false)
 	private String name;
 	@OneToMany(mappedBy="person",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-    private Set<AssignedAsset> assignedAssets;
+    private Set<AssignedAsset> assignedAssets = new HashSet<AssignedAsset>();
 
 	/**
 	 * 
