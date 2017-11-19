@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /**
  * @author sergio
  *
@@ -28,13 +31,14 @@ public class AssignedAsset{
 	private int id;
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "asset_id",nullable=false)
+	@JsonBackReference
 	private Asset asset;
 	@ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="person_id", nullable=true)
-    private Person person;
+	private Person person;
 	@ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="area_id", nullable=true)
-    private Area area;
+	private Area area;
 	
 	/**
 	 * 

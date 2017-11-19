@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.com.sbaqueroa.gads.dao.PersonDAO;
 import co.com.sbaqueroa.gads.model.implementation.Person;
@@ -37,6 +38,13 @@ public class PersonDAOImplementetation implements PersonDAO {
 	    Root<Person> root = cq.from(Person.class);
 	    cq.select(root);
 	    return entityManager.createQuery(cq).getResultList();
+	}
+
+	@Override
+	@Transactional
+	public Person getById(Person person) throws Exception {
+		person = entityManager.find(Person.class, person.getId());
+		return person;
 	}
 
 }

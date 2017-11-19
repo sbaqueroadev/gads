@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.com.sbaqueroa.gads.dao.AreaDAO;
 import co.com.sbaqueroa.gads.model.implementation.Area;
@@ -37,6 +38,13 @@ public class AreaDAOImplementetation implements AreaDAO {
 	    Root<Area> root = cq.from(Area.class);
 	    cq.select(root);
 	    return entityManager.createQuery(cq).getResultList();
+	}
+
+	@Override
+	@Transactional
+	public Area getById(Area area) throws Exception {
+		area = entityManager.find(Area.class,area.getId());
+		return area;
 	}
 
 }

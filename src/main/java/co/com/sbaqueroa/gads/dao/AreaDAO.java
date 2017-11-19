@@ -14,4 +14,5 @@ import co.com.sbaqueroa.gads.model.implementation.Area;
  */
 public interface AreaDAO {
 	public List<Area> getAll() throws Exception;
+	public Area getById(Area area) throws Exception;
 }

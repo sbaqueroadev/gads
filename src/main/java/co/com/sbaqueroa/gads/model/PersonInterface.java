@@ -14,4 +14,5 @@ import co.com.sbaqueroa.gads.model.implementation.Person;
  */
 public interface PersonInterface {
 	public List<Person> getAll();
+	public Person getById(Person person);
 }

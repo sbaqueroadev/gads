@@ -37,4 +37,14 @@ public class PersonImpl implements PersonInterface {
 		return new ArrayList<Person>();
 	}
 
+	@Override
+	public Person getById(Person person) {
+		try {
+			return personDAO.getById(person);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

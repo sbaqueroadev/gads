@@ -71,8 +71,9 @@ public class AssetDAOImplementation implements AssetDAO {
 	 * @see co.com.sbaqueroa.gads.dao.AssetDAO#update(co.com.sbaqueroa.gads.model.implementation.Asset)
 	 */
 	@Override
+	@Transactional(readOnly=false)
 	public Asset update(Asset asset) throws Exception {
-		entityManager.refresh(asset);
+		entityManager.merge(asset);
 		entityManager.flush();
 		return asset;
 	}

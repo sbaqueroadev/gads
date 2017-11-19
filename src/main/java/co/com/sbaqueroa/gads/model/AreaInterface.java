@@ -14,4 +14,5 @@ import co.com.sbaqueroa.gads.model.implementation.Area;
  */
 public interface AreaInterface {
 	public List<Area> getAll();
+	public Area getById(Area area);
 }

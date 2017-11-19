@@ -2,12 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>co.com.sbaqueroa</groupId>
 	<artifactId>GDAS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-
 	<name>GDAS</name>
 	<description>GDAS Test</description>
 
@@ -26,6 +23,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<hibernate.version>4.1.9.Final</hibernate.version>
+		<start-class>co.com.sbaqueroa.gads.GdasApplication</start-class>
 	</properties>
 
 	<dependencies>

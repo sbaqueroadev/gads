@@ -21,9 +21,6 @@ import co.com.sbaqueroa.gads.services.AssetImpl;
 public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
-	@Autowired
-	private AssetImpl assetImpl;
 	
 	/**
 	 * Redirects to /order/form as the home page.
@@ -34,10 +31,13 @@ public class HomeController {
 	 * @return View represented by a JSP file.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public @ResponseBody Asset home(HttpServletRequest request, HttpServletResponse httpServletResponse) {
-		logger.debug(""+assetImpl.getAll().size());
-		System.out.println(""+new AssetImpl().getAll().size());
-		return new Asset();
+	public String init() {
+		return "redirect:home/";
+	}
+	
+	@RequestMapping(value = "/home/", method = RequestMethod.GET)
+	public String home() {
+		return "home/home";
 	}
 
 }
