@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,33 +48,45 @@ public class AssetController {
 	 * @return View represented by a JSP file.
 	 */
 	@RequestMapping(value = "/asset", method = RequestMethod.GET)
-	public @ResponseBody List<Asset> home(
+	public @ResponseBody ResponseEntity<?> home(
 			@RequestParam(value="type",required=false) String type,
 			@RequestParam(value="buyDate",required=false) String buyDate,
 			@RequestParam(value="serial",required=false) String serial
 			) {
 		//logger.debug(""+assetImpl.getAll().size());
 		//System.out.println(""+new AssetImpl().getAll().size());
+		List<Asset> result;
 		if(serial!=null)
-			return assetImpl.getAllByFieldValue(Asset.SERIAL_FIELD, serial);
+			result = assetImpl.getAllByFieldValue(Asset.SERIAL_FIELD, serial);
 		if(type!=null)
-			return assetImpl.getAllByFieldValue(Asset.TYPE_FIELD, type);
+			result = assetImpl.getAllByFieldValue(Asset.TYPE_FIELD, type);
 		if(buyDate!=null)
-			return assetImpl.getAllByFieldValue(Asset.BUY_DATE_FIELD, buyDate);
-		return assetImpl.getAll();
+			result = assetImpl.getAllByFieldValue(Asset.BUY_DATE_FIELD, buyDate);
+		result = assetImpl.getAll();
+		if(result.size()>0)
+			return ResponseEntity.ok(result);
+		
+		else{
+			return ResponseEntity.status(404).body(new JSONObject()
+					.put("result", "fail")
+					.put("msg", "No data").toString());
+		}
+		
 	}
 
 	@RequestMapping(value = "/asset", method = RequestMethod.POST)
-	public @ResponseBody String add(@RequestBody Asset asset) {
+	public @ResponseBody ResponseEntity<String> add(@RequestBody Asset asset) {
 		JSONObject result = new JSONObject();
 		if(assetImpl.add(asset)){
-			return result.put("result", "OK").toString();
+			return ResponseEntity.ok(result.put("result", "OK").toString());
 		}else
-			return result.put("result", "fail").toString();
+			return ResponseEntity.status(400).body(result
+					.put("result", "fail")
+					.put("msg", "Error creating asset.").toString());
 	}
 
 	@RequestMapping(value = "/asset", method = RequestMethod.PUT)
-	public @ResponseBody String update(@RequestBody Asset asset) {
+	public @ResponseBody ResponseEntity<String> update(@RequestBody Asset asset) {
 		JSONObject result = new JSONObject();
 		List<Asset> consult = assetImpl.getAllByFieldValue(Asset.ID_FIELD, ""+asset.getId());
 		if(consult.size()>0){
@@ -120,18 +133,22 @@ public class AssetController {
 			else
 				entity.setStatus(""+AssetStatus.AVAILABLE.getId());
 			if(assetImpl.update(entity)){
-				return result.put("result", "OK").toString();
+				return ResponseEntity.ok(result.put("result", "OK").toString());
 			}else
-				return result.put("result", "fail").toString();
+				return ResponseEntity.status(400).body(result
+						.put("result", "fail")
+						.put("msg", "Error updating asset.").toString());
 		}else
-			return result.put("result", "fail").toString();
+			return ResponseEntity.status(400).body(result
+					.put("result", "fail")
+					.put("msg", "Asset doesn't exist.").toString());
 	}
 
 	@RequestMapping(value="/asset/record",method = {RequestMethod.GET})
 	public ModelAndView init(){
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("asset/record");
-		List<Asset> data = this.home(null,null,null);
+		List<Asset> data = assetImpl.getAll();
 		if(data.size()>0)
 			mv.addObject("data",data);
 		return mv;
