@@ -34,7 +34,7 @@ assetUpdateApp.controller("assetUpdateCtrlr", ['$scope','$q','$http',function($s
 			}
 		},
 		function error(response){
-			
+
 		});
 	};
 	$scope.assignedSelected=function(type){
@@ -78,21 +78,31 @@ assetUpdateApp.controller("assetUpdateCtrlr", ['$scope','$q','$http',function($s
 	/************************ SEND NEW ORDER****************************************/
 	function sendAsset(){
 		var deferred = $q.defer();
-		var data = $scope.asset;
-		$http.put("../asset",JSON.stringify(data))
-		.then(function success(response){
-			if(response.data.result=="OK"){
-				$scope.asset={};
-				$("#updateAssetForm").trigger("reset");
-				$scope.init();
-				alert("Update correctly!");
-			}else
+		var flag = true;
+		var data =$scope.asset; 
+		if($scope.asset.withdrawalDate)
+			if($scope.asset.buyDate>=$scope.asset.withdrawalDate)
+				flag = false;
+		if(flag)
+			$http.put("../asset",JSON.stringify(data))
+			.then(function success(response){
+				if(response.data.result=="OK"){
+					$scope.asset={};
+					$("#updateAssetForm").trigger("reset");
+					$scope.init();
+					alert("Update correctly!");
+				}else
+					alert("Error. Try later please.");
+				deferred.resolve(response.data);
+			},
+			function error(response){
 				alert("Error. Try later please.");
-			deferred.resolve(response.data);
-		},
-		function error(response){
-			deferred.resolve();//[{id:1,name:"P1"}]);
-		});
+				deferred.resolve();
+			});
+		else{
+			alert("Fecha de baja debe ser superior a fecha de compra.");
+			deferred.resolve();
+		}
 		return deferred.promise;
 	}
 	/********************************************************************************/

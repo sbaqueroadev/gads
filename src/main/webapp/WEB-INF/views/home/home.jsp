@@ -9,11 +9,17 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
+	<link rel="stylesheet" href="../resources/css/custom.css">
 </head>
 <body>
+	<header>
+	<h2 class="title">Bienvenido</h2>
 	<%@include  file="menu.html" %>
-	<div id="content">
-	
+	</header>
+	<div id="content" class="row">
+	<p class="description col-md-offset-1 col-md-10">
+	Seleccione una de las secciones del menú principal.
+	</p>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"
 		type="text/javascript"></script>

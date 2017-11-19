@@ -11,36 +11,41 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
+	<link rel="stylesheet" href="../resources/css/custom.css">
 </head>
 <body>
-	<%@include file="../home/menu.html"%>
+	<header>
+	<h2 class="title">Listado de áreas</h2>
+	<%@include file="../home/menu.html"%> </header>
 	<div id="content" ng-app='areaRecordApp'
-		ng-controller="recordListCtrlr" ng-init='records = []'>
-		<table class="table table-bordered table-striped records-table">
+		ng-controller="recordListCtrlr" ng-init='records = []' class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<table class="table table-bordered table-striped records-table">
 
-			<thead>
-				<tr>
-					<td>Id</td>
-					<td>Nombre</td>
-					<td>Ciudad</td>
-				</tr>
-			</thead>
-
-			<tbody>
-				<c:if test="${empty data}">
+				<thead>
 					<tr>
-						<td colspan="3">No hay areas registradas</td>
+						<td>Id</td>
+						<td>Nombre</td>
+						<td>Ciudad</td>
 					</tr>
-				</c:if>
-				<c:if test="${not empty data}">
-					<tr ng-repeat="record in records | orderBy:sortType:sortReverse">
-						<td>{{ record.id }}</td>
-						<td>{{ record.name }}</td>
-						<td>{{ record.city.name }}</td>
-					</tr>
-				</c:if>
-			</tbody>
-		</table>
+				</thead>
+
+				<tbody>
+					<c:if test="${empty data}">
+						<tr>
+							<td colspan="3">No hay areas registradas</td>
+						</tr>
+					</c:if>
+					<c:if test="${not empty data}">
+						<tr ng-repeat="record in records | orderBy:sortType:sortReverse">
+							<td>{{ record.id }}</td>
+							<td>{{ record.name }}</td>
+							<td>{{ record.city.name }}</td>
+						</tr>
+					</c:if>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"
 		type="text/javascript"></script>

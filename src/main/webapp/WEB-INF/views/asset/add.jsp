@@ -5,32 +5,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Sergio Baquero - Area</title>
+<title>Sergio Baquero - Activo</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="../resources/css/custom.css">
 </head>
 <body>
-	<%@include file="../home/menu.html"%>
+	<header>
+	<h2 class="title">Crear un activo</h2>
+	<%@include file="../home/menu.html"%> </header>
 	<div id="content" ng-app='assetAddApp'>
 		<form id="addAssetForm" ng-controller="assetAddCtrlr as vm"
 			ng-submit="send()" ng-init="asset = {}"
 			class="col-md-offset-1 col-md-10">
-			<div class="col-md-offset-2 col-md-6">
+			<div class="row">
+			<div class="col-md-4">
 				<label for="name">Nombre:</label> <input class="form-control"
 					id="name" type="text" name="name" ng-model="asset.name" required />
 			</div>
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-4">
 				<label for="serial">Serial:</label> <input class="form-control"
 					id="serial" type="text" name="serial" ng-model="asset.serial"
 					required />
 			</div>
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-4">
 				<label for="type">Tipo:</label> <input class="form-control"
 					id="type" type="text" name="type" ng-model="asset.type" required />
 			</div>
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-4">
 				<label for="status">Estado:</label> <select class="form-control"
 					id="status" name="status" ng-model="asset.status" required>
 					<c:if test="${empty assetStatus}">
@@ -44,55 +48,56 @@
 					</c:if>
 				</select>
 			</div>
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-4">
 				<label for="inventoryNumber">Número de inventario:</label> <input
 					class="form-control" id="inventoryNumber" type="text"
 					name="inventoryNumber" ng-model="asset.inventoryNumber" required />
 			</div>
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-4">
 				<label for="buyDate">Fecha de compra:</label> <input
 					class="form-control" id="buyDate" type="date" name="buyDate"
 					ng-model="asset.buyDate" required />
 			</div>
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-4">
 				<label for="buyPrice">Precio de compra:</label> <input
-					class="form-control" id="buyPrice" type="number" step="0.01" name="buyPrice"
-					ng-model="asset.buyPrice" required />
+					class="form-control" id="buyPrice" type="number" step="0.01"
+					name="buyPrice" ng-model="asset.buyPrice" required />
 			</div>
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-4">
 				<label for="color">Color:</label> <input class="form-control"
 					id="color" type="text" name="color" ng-model="asset.color" required />
 			</div>
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-4">
 				<label for="width">Ancho:</label> <input class="form-control"
-					id="width" type="number" step="0.01" name="width" ng-model="asset.width" required />
+					id="width" type="number" step="0.01" name="width"
+					ng-model="asset.width" required />
 			</div>
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-4">
 				<label for="length">Largo:</label> <input class="form-control"
-					id="length" type="number" step="0.01" name="length" ng-model="asset.length"
-					required />
+					id="length" type="number" step="0.01" name="length"
+					ng-model="asset.length" required />
 			</div>
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-4">
 				<label for="height">Altura:</label> <input class="form-control"
-					id="height" type="number" step="0.01" name="height" ng-model="asset.height"
-					required />
+					id="height" type="number" step="0.01" name="height"
+					ng-model="asset.height" required />
 			</div>
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-4">
 				<label for="weight">Peso:</label> <input class="form-control"
-					id="weight" type="number" step="0.01" name="weight" ng-model="asset.weight"
-					required />
+					id="weight" type="number" step="0.01" name="weight"
+					ng-model="asset.weight" required />
 			</div>
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-4">
 				<label for="withdrawalDate">Fecha de baja:</label> <input
 					class="form-control" id="withdrawalDate" type="date"
-					name="withdrawalDate" ng-model="asset.withdrawalDate"/>
+					name="withdrawalDate" ng-model="asset.withdrawalDate" />
 			</div>
-
-			<div class="row">
-				<div class="col-md-offset-5 col-md-2">
-					<input class="form-control btn btn-success" type="submit"
-						value="Enviar" />
-				</div>
+			</div><div class="row">
+			<div class="col-md-offset-1 col-md-2">
+			<br>
+				<input class="form-control btn btn-success" type="submit"
+					value="Enviar" />
+			</div>
 			</div>
 		</form>
 	</div>

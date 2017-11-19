@@ -10,11 +10,15 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="../resources/css/custom.css">
 </head>
 <body>
-	<%@include file="../home/menu.html"%>
+	<header>
+	<h2 class="title">Listado de personas</h2>
+	<%@include file="../home/menu.html"%> </header>
 	<div id="content" ng-app='personRecordApp'
-		ng-controller="recordListCtrlr" ng-init='records = []'>
+		ng-controller="recordListCtrlr" ng-init='records = []' class="row">
+		<div class="col-md-offset-1 col-md-10">
 		<table class="table table-bordered table-striped records-table">
 
 			<thead>
