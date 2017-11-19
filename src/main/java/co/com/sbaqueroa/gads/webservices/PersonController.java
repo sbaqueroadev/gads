@@ -2,9 +2,6 @@ package co.com.sbaqueroa.gads.webservices;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import co.com.sbaqueroa.gads.model.implementation.Person;
 import co.com.sbaqueroa.gads.services.PersonImpl;
@@ -36,8 +34,24 @@ public class PersonController {
 	 * @return View represented by a JSP file.
 	 */
 	@RequestMapping(value = "/person", method = RequestMethod.GET)
-	public @ResponseBody List<Person> home(HttpServletRequest request, HttpServletResponse httpServletResponse) {
+	public @ResponseBody List<Person> home() {
 		return personImpl.getAll();
+	}
+	
+	@RequestMapping(value="/person/home",method = {RequestMethod.GET})
+	public ModelAndView form(){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("person/record");
+		List<Person> data = this.home();
+		if(data.size()>0)
+			mv.addObject("data",data);
+		return mv;
+	}
+	
+	public Person get(int id) {
+		Person person = new Person();
+		person.setId(id);
+		return personImpl.getById(person);
 	}
 
 }

@@ -3,7 +3,9 @@
  */
 package co.com.sbaqueroa.gads.model.implementation;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /**
  * @author sergio
  * .
@@ -25,9 +29,32 @@ import javax.persistence.Table;
 @Table(name="asset")
 public class Asset {
 
+	public static enum AssetStatus{
+		ACTIVE(1), CANCELED(2), IN_REPAIR(3), AVAILABLE(4), ASSIGNED(5);
+		
+		private int id;
+
+		private AssetStatus(int id){
+			this.id = id;
+		}
+		
+		public int getId(){
+			return this.id;
+		}
+		
+		public static List<AssetStatus> getAll(){
+			ArrayList<AssetStatus> result = new ArrayList<AssetStatus>();
+			for(AssetStatus a : AssetStatus.values())
+				result.add(a);
+			return result;
+			
+		}
+		
+	};
 	public static final String SERIAL_FIELD = "serial";
 	public static final String BUY_DATE_FIELD = "buy_date";
 	public static final String TYPE_FIELD = "type";
+	public static final String ID_FIELD = "id";
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id",nullable=false,updatable=false)
@@ -61,6 +88,7 @@ public class Asset {
 	
 	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL, 
             fetch = FetchType.LAZY, optional = true)
+	@JsonManagedReference
 	private AssignedAsset assignedAsset;
 	
 	/**

@@ -37,4 +37,14 @@ public class AreaImpl implements AreaInterface {
 		return new ArrayList<Area>();
 	}
 
+	@Override
+	public Area getById(Area area) {
+		try {
+			return areaDAO.getById(area);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

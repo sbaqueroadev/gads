@@ -16,6 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /**
  * @author sergio
  * .
@@ -31,7 +35,8 @@ public class Person {
 	@Column(name="name",columnDefinition="VARCHAR(45)",nullable=false)
 	private String name;
 	@OneToMany(mappedBy="person",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-    private Set<AssignedAsset> assignedAssets = new HashSet<AssignedAsset>();
+	@JsonIgnore
+	private Set<AssignedAsset> assignedAssets = new HashSet<AssignedAsset>();
 
 	/**
 	 * 

@@ -14,4 +14,5 @@ import co.com.sbaqueroa.gads.model.implementation.Person;
  */
 public interface PersonDAO {
 	public List<Person> getAll() throws Exception;
+	public Person getById(Person person) throws Exception;
 }

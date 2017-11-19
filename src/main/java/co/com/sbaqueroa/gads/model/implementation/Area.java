@@ -18,6 +18,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /**
  * @author sergio
  * .
@@ -36,7 +40,8 @@ public class Area {
 	@JoinColumn(name="city_id",columnDefinition="INT(11)",nullable=false)
 	private City city;
 	@OneToMany(mappedBy="area",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-    private Set<AssignedAsset> assignedAssets = new HashSet<AssignedAsset>();
+	@JsonIgnore
+	private Set<AssignedAsset> assignedAssets = new HashSet<AssignedAsset>();
 	/**
 	 * 
 	 */
