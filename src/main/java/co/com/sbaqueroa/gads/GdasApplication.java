@@ -19,23 +19,41 @@ import org.springframework.web.servlet.view.JstlView;
 
 import co.com.sbaqueroa.gads.services.AssetImpl;
 
+/**
+ * @author sergio
+ * Project Main class which contains some basic configuration
+ */
 @SpringBootApplication
 @EnableScheduling
 @ComponentScan
 @EnableAutoConfiguration
 @EntityScan(basePackages={"co.com.sbaqueroa.gads.model.implementation"})
+
 public class GdasApplication extends SpringBootServletInitializer{
 
 	
+	/**
+	 * Runs the Spring App.
+	 * @param args Arguments to evaluate.
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(GdasApplication.class, args);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.boot.builder.SpringApplicationBuilder
+	 */
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(Main.class);
 	}
 	
+	/**
+	 * @return Bean of type ViewResolver to manage JSTL Views.
+	 */
+	/* (non-Javadoc)
+	 * @see org.springframework.web.servlet.ViewResolver
+	 */
 	@Bean
 	public ViewResolver getViewResolver(){
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();

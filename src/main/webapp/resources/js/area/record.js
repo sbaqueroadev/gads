@@ -1,5 +1,5 @@
 /**
- * 
+ * Area Record Angular App
  */
 var areaRecordApp = angular.module("areaRecordApp", []);
 

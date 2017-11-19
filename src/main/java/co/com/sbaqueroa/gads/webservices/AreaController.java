@@ -19,23 +19,21 @@ import co.com.sbaqueroa.gads.model.implementation.Area;
 import co.com.sbaqueroa.gads.services.AreaImpl;
 
 /**
- * Handles requests for the application home page.
+ * Handles requests for the application in area section.
  */
 @Controller
 public class AreaController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AreaController.class);
 
+	/**
+	 * Connection with services layer.
+	 */
 	@Autowired
 	private AreaImpl areaImpl;
 	
 	/**
-	 * Redirects to /order/form as the home page.
-	 * 
-	 * @param request HTTP request to handle on.
-	 * @param httpServletResponse HTTP response to return.
-	 * 
-	 * @return View represented by a JSP file.
+	 * @return All areas in JSON Format.
 	 */
 	@RequestMapping(value = "/area", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<?> home() {
@@ -49,6 +47,9 @@ public class AreaController {
 		}
 	}
 	
+	/**
+	 * @return Area record View represented by a JSP file.
+	 */
 	@RequestMapping(value="/area/home",method = {RequestMethod.GET})
 	public ModelAndView form(){
 		ModelAndView mv = new ModelAndView();
@@ -59,6 +60,10 @@ public class AreaController {
 		return mv;
 	}
 
+	/**Get area by id.
+	 * @param id to look for.
+	 * @return Area instance identified by id.
+	 */
 	public Area get(int id) {
 		Area area = new Area();
 		area.setId(id);

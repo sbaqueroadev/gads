@@ -21,13 +21,16 @@ import co.com.sbaqueroa.gads.model.implementation.Asset;
 
 /**
  * @author sergio
- * .
+ * Person DAO implementation.
  *
  */
 @Repository
 public class AssetDAOImplementation implements AssetDAO {
 
 	
+	/**
+	 * Hibernate's entity manager.
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 	

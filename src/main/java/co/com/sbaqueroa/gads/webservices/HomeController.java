@@ -23,10 +23,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
-	 * Redirects to /order/form as the home page.
-	 * 
-	 * @param request HTTP request to handle on.
-	 * @param httpServletResponse HTTP response to return.
+	 * Redirects to /home/ as the home page.
 	 * 
 	 * @return View represented by a JSP file.
 	 */
@@ -35,6 +32,9 @@ public class HomeController {
 		return "redirect:home/";
 	}
 	
+	/**
+	 * @return Home View represented by a JSP file.
+	 */
 	@RequestMapping(value = "/home/", method = RequestMethod.GET)
 	public String home() {
 		return "home/home";

@@ -15,12 +15,15 @@ import co.com.sbaqueroa.gads.model.implementation.AssignedAsset;
 
 /**
  * @author sergio
- * .
+ * Assigned Asset services.
  *
  */
 @Service
 public class AssignedAssetImpl implements AssignedAssetInterface {
 
+	/**
+	 * Connection with DAO.
+	 */
 	@Autowired
 	private AssignedAssetDAO assignedAssetDAO;
 	

@@ -43,7 +43,7 @@ public class PersonDAOImplementationTest {
 	@Test
 	public void test() {
 		try {
-			assertEquals(1,personDAO.getAll().size());
+			assertEquals(2,personDAO.getAll().size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

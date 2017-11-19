@@ -22,26 +22,39 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * @author sergio
- * .
+ * Implementation of Asset Model.
  *
  */
 @Entity
 @Table(name="asset")
 public class Asset {
 
+	/**
+	 * @author sergio
+	 * Asset status options.
+	 */
 	public static enum AssetStatus{
 		ACTIVE(1), CANCELED(2), IN_REPAIR(3), AVAILABLE(4), ASSIGNED(5);
 		
 		private int id;
 
+		/**
+		 * @param id the id to be set.
+		 */
 		private AssetStatus(int id){
 			this.id = id;
 		}
 		
+		/**
+		 * @return the id.
+		 */
 		public int getId(){
 			return this.id;
 		}
 		
+		/**
+		 * @return all Asset status options.
+		 */
 		public static List<AssetStatus> getAll(){
 			ArrayList<AssetStatus> result = new ArrayList<AssetStatus>();
 			for(AssetStatus a : AssetStatus.values())
@@ -51,48 +64,105 @@ public class Asset {
 		}
 		
 	};
+	/**
+	 * Serial field constant
+	 */
 	public static final String SERIAL_FIELD = "serial";
+	/**
+	 * Buy date field constant
+	 */
 	public static final String BUY_DATE_FIELD = "buy_date";
+	/**
+	 * type field constant
+	 */
 	public static final String TYPE_FIELD = "type";
+	/**
+	 * Id field constant
+	 */
 	public static final String ID_FIELD = "id";
+	/**
+	 * Asset id
+	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id",nullable=false,updatable=false)
 	private int id;
+	/**
+	 * Asset name
+	 */
 	@Column(name="name",columnDefinition="VARCHAR(45)",nullable=false)
 	private String name;
+	/**
+	 * Asset type.
+	 */
 	@Column(name=TYPE_FIELD,columnDefinition="VARCHAR(45)",nullable=false)
 	private String type;
+	/**
+	 * Asset serial.
+	 */
 	@Column(name=SERIAL_FIELD,columnDefinition="VARCHAR(45)",nullable=false)
 	private String serial;
+	/**
+	 * Asset inventory number.
+	 */
 	@Column(name="inventory_number",columnDefinition="VARCHAR(45)",nullable=false)
 	private String inventoryNumber;
+	/**
+	 * Asset status
+	 */
 	@Column(name="status",columnDefinition="VARCHAR(15)",nullable=false)
 	private String status;
+	/**
+	 * Asset color
+	 */
 	@Column(name="color",columnDefinition="VARCHAR(20)",nullable=false)
 	private String color;
+	/**
+	 * Asset weight.
+	 */
 	@Column(name="weight",columnDefinition="DECIMAL(11,2)")
 	private float weight;
+	/**
+	 * Asset height.
+	 */
 	@Column(name="height",columnDefinition="DECIMAL(11,2)")
 	private float height;
+	/**
+	 * Asset width.
+	 */
 	@Column(name="width",columnDefinition="DECIMAL(11,2)")
 	private float width;
+	/**
+	 * Asset height.
+	 */
 	@Column(name="length",columnDefinition="DECIMAL(11,2)")
 	private float length;
+	/**
+	 * Asset buy price.
+	 */
 	@Column(name="buy_price",columnDefinition="DECIMAL(11,2)",nullable=false)
 	private float buyPrice;
+	/**
+	 * Asset buy date.
+	 */
 	@Column(name=BUY_DATE_FIELD,columnDefinition="DATE",nullable=false)
 	private Date buyDate;
+	/**
+	 * Asset withdrawal date.
+	 */
 	@Column(name="withdrawal_date",columnDefinition="DATE")
 	private Date withdrawalDate;
 	
+	/**
+	 * Asset assignment reference.
+	 */
 	@OneToOne(mappedBy = "asset", cascade = CascadeType.ALL, 
             fetch = FetchType.LAZY, optional = true)
 	@JsonManagedReference
 	private AssignedAsset assignedAsset;
 	
 	/**
-	 * 
+	 * Super class constructor
 	 */
 	public Asset() {
 		super();

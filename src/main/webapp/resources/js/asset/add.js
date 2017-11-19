@@ -1,5 +1,5 @@
 /**
- * 
+ * Asset adding Angular App
  */
 var assetAddApp = angular.module("assetAddApp", []);
 
@@ -11,7 +11,7 @@ assetAddApp.controller("assetAddCtrlr", ['$scope','$q','$http',function($scope,$
 		sendAsset().then(function(result){});
 	};
 	/********************************************************************************/
-	/************************ SEND NEW ORDER****************************************/
+	/************************ SEND NEW ASSET****************************************/
 	function sendAsset(){
 		var deferred = $q.defer();
 		var data = $scope.asset;

@@ -15,12 +15,15 @@ import co.com.sbaqueroa.gads.model.implementation.Area;
 
 /**
  * @author sergio
- * .
+ * Area services.
  *
  */
 @Service
 public class AreaImpl implements AreaInterface {
 
+	/**
+	 * Connection with DAO.
+	 */
 	@Autowired
 	private AreaDAO areaDAO;
 	
@@ -37,6 +40,9 @@ public class AreaImpl implements AreaInterface {
 		return new ArrayList<Area>();
 	}
 
+	/* (non-Javadoc)
+	 * @see co.com.sbaqueroa.gads.model.AreaInterface#getById(co.com.sbaqueroa.gads.model.implementation.Area)
+	 */
 	@Override
 	public Area getById(Area area) {
 		try {

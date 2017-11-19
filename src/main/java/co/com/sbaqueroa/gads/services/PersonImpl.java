@@ -15,12 +15,14 @@ import co.com.sbaqueroa.gads.model.implementation.Person;
 
 /**
  * @author sergio
- * .
- *
+ * Person services.
  */
 @Service
 public class PersonImpl implements PersonInterface {
 
+	/**
+	 * Connection with DAO.
+	 */
 	@Autowired
 	private PersonDAO personDAO;
 	
@@ -37,6 +39,9 @@ public class PersonImpl implements PersonInterface {
 		return new ArrayList<Person>();
 	}
 
+	/* (non-Javadoc)
+	 * @see co.com.sbaqueroa.gads.model.PersonInterface#getById(co.com.sbaqueroa.gads.model.implementation.Person)
+	 */
 	@Override
 	public Person getById(Person person) {
 		try {

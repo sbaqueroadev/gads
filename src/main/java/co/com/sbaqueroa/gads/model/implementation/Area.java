@@ -24,26 +24,38 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * @author sergio
- * .
+ * Implementation of Area Model.
  *
  */
 @Entity
 @Table(name="area")
 public class Area {
+	/**
+	 * Area id.
+	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id",nullable=false,updatable=false)
 	private int id;
+	/**
+	 * Area name.
+	 */
 	@Column(name="name",columnDefinition="VARCHAR(45)",nullable=false)
 	private String name;
+	/**
+	 * Area city.
+	 */
 	@OneToOne(cascade=CascadeType.ALL,targetEntity=City.class)
 	@JoinColumn(name="city_id",columnDefinition="INT(11)",nullable=false)
 	private City city;
+	/**
+	 * Area asigned asset references.
+	 */
 	@OneToMany(mappedBy="area",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JsonIgnore
 	private Set<AssignedAsset> assignedAssets = new HashSet<AssignedAsset>();
 	/**
-	 * 
+	 * Super class constructor.
 	 */
 	public Area() {
 		super();

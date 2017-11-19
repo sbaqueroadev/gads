@@ -19,12 +19,15 @@ import co.com.sbaqueroa.gads.model.implementation.Area;
 
 /**
  * @author sergio
- * .
+ * Area DAO implementation.
  *
  */
 @Repository
 public class AreaDAOImplementetation implements AreaDAO {
 
+	/**
+	 * Hibernate's entity manager.
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 	
@@ -40,6 +43,9 @@ public class AreaDAOImplementetation implements AreaDAO {
 	    return entityManager.createQuery(cq).getResultList();
 	}
 
+	/* (non-Javadoc)
+	 * @see co.com.sbaqueroa.gads.dao.AreaDAO#getById(co.com.sbaqueroa.gads.model.implementation.Area)
+	 */
 	@Override
 	@Transactional
 	public Area getById(Area area) throws Exception {

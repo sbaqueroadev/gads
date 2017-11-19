@@ -23,29 +23,38 @@ import co.com.sbaqueroa.gads.model.implementation.Person;
 import co.com.sbaqueroa.gads.services.AssetImpl;
 
 /**
- * Handles requests for the application home page.
+ * Handles requests for the application in asset section.
  */
 @Controller
 public class AssetController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AssetController.class);
 
+	/**
+	 * Connection with services layer.
+	 */
 	@Autowired
 	private AssetImpl assetImpl;
 	
+	/**
+	 * Person controller to get its services.
+	 */
 	@Autowired
 	private PersonController personController;
 	
+	/**
+	 * Area controller to get its services.
+	 */
 	@Autowired
 	private AreaController areaController;
 
 	/**
-	 * Redirects to /order/form as the home page.
+	 * Get all assets filtered or not by type, buyDate, serial.
 	 * 
-	 * @param request HTTP request to handle on.
-	 * @param httpServletResponse HTTP response to return.
-	 * 
-	 * @return View represented by a JSP file.
+	 * @param type of the asset. if not null and buyDate is null is used to filter the result.
+	 * @param buyDate of the asset. if not null and type is null, used to filter the result.
+	 * @param serial of the asset. if not null is used to filter the result.
+	 * @return if success list of assets filtered or not. Error JSON Object otherwise. 
 	 */
 	@RequestMapping(value = "/asset", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<?> home(
@@ -74,6 +83,10 @@ public class AssetController {
 		
 	}
 
+	/** Add an asset
+	 * @param asset to be added.
+	 * @return JSON Object with result.
+	 */
 	@RequestMapping(value = "/asset", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<String> add(@RequestBody Asset asset) {
 		JSONObject result = new JSONObject();
@@ -85,6 +98,11 @@ public class AssetController {
 					.put("msg", "Error creating asset.").toString());
 	}
 
+	
+	/** Update an asset
+	 * @param asset to be udated.
+	 * @return JSON Object with result.
+	 */
 	@RequestMapping(value = "/asset", method = RequestMethod.PUT)
 	public @ResponseBody ResponseEntity<String> update(@RequestBody Asset asset) {
 		JSONObject result = new JSONObject();
@@ -144,6 +162,9 @@ public class AssetController {
 					.put("msg", "Asset doesn't exist.").toString());
 	}
 
+	/** Get view of asset list.
+	 * @return Asset list view.
+	 */
 	@RequestMapping(value="/asset/record",method = {RequestMethod.GET})
 	public ModelAndView init(){
 		ModelAndView mv = new ModelAndView();
@@ -154,6 +175,9 @@ public class AssetController {
 		return mv;
 	}
 
+	/** Get view of adding asset .
+	 * @return Asset adding view.
+	 */
 	@RequestMapping(value="/asset/add",method = {RequestMethod.GET})
 	public ModelAndView addForm(){
 		ModelAndView mv = new ModelAndView();
@@ -162,6 +186,9 @@ public class AssetController {
 		return mv;
 	}
 
+	/** Get view of updating asset .
+	 * @return Asset updating view.
+	 */
 	@RequestMapping(value="/asset/update",method = {RequestMethod.GET})
 	public ModelAndView updateForm(){
 		ModelAndView mv = new ModelAndView();

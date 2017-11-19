@@ -17,23 +17,21 @@ import co.com.sbaqueroa.gads.model.implementation.Person;
 import co.com.sbaqueroa.gads.services.PersonImpl;
 
 /**
- * Handles requests for the application home page.
+ * Handles requests for the application in person section.
  */
 @Controller
 public class PersonController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
 
+	/**
+	 * Connection with services layer.
+	 */
 	@Autowired
 	private PersonImpl personImpl;
 	
 	/**
-	 * Redirects to /order/form as the home page.
-	 * 
-	 * @param request HTTP request to handle on.
-	 * @param httpServletResponse HTTP response to return.
-	 * 
-	 * @return View represented by a JSP file.
+	 * @return All persons in JSON Format.
 	 */
 	@RequestMapping(value = "/person", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<?> home() {
@@ -47,8 +45,11 @@ public class PersonController {
 		}
 	}
 	
+	/**
+	 * @return Person record View represented by a JSP file.
+	 */
 	@RequestMapping(value="/person/home",method = {RequestMethod.GET})
-	public ModelAndView form(){
+	public ModelAndView init(){
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("person/record");
 		List<Person> data = personImpl.getAll();
@@ -57,6 +58,10 @@ public class PersonController {
 		return mv;
 	}
 	
+	/**Get person by id.
+	 * @param id to look for.
+	 * @return Person instance identified by id.
+	 */
 	public Person get(int id) {
 		Person person = new Person();
 		person.setId(id);

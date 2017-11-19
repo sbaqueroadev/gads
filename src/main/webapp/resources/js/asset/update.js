@@ -1,12 +1,12 @@
 /**
- * 
+ * Asset updating Angular App
  */
 var assetUpdateApp = angular.module("assetUpdateApp", []);
 
 /************************ LIST CONTROLLER****************************************/
 assetUpdateApp.controller("assetUpdateCtrlr", ['$scope','$q','$http',function($scope,$q,$http) {
 	$scope.asset = {};
-	/************************ SEND DATA PROCESS****************************************/
+	/************************ PROCESS WHEN SERIAL CHANGES****************************************/
 	$scope.serialChanged = function(){
 		$http.get("../asset?serial="+$scope.asset.serial)
 		.then(function success(response){
@@ -37,6 +37,7 @@ assetUpdateApp.controller("assetUpdateCtrlr", ['$scope','$q','$http',function($s
 
 		});
 	};
+	/************************ PROCESS WHEN ASSIGNMENT SELECTED****************************************/
 	$scope.assignedSelected=function(type){
 		switch(type){
 		case 'person':
@@ -47,9 +48,11 @@ assetUpdateApp.controller("assetUpdateCtrlr", ['$scope','$q','$http',function($s
 			break;
 		}
 	};
+	/************************ SEND ASSET****************************************/
 	$scope.send = function(){
 		sendAsset().then(function(result){});
 	};
+	/************************ INIT PROCESS****************************************/
 	$scope.init = function(){
 		$("#updateAssetForm input").not('input[name="serial"]')
 		.not('input[type="submit"]')
@@ -57,6 +60,7 @@ assetUpdateApp.controller("assetUpdateCtrlr", ['$scope','$q','$http',function($s
 		$("#updateAssetForm select").attr("disabled","disabled");
 	}
 	$scope.init();
+	/************************ LOAD INIT DATA****************************************/
 	$scope.loadData = function(){
 		$http.get("../person")
 		.then(function success(response){
@@ -75,7 +79,7 @@ assetUpdateApp.controller("assetUpdateCtrlr", ['$scope','$q','$http',function($s
 	};
 	$scope.loadData();
 	/********************************************************************************/
-	/************************ SEND NEW ORDER****************************************/
+	/************************ SEND ASSET TO UPDATE****************************************/
 	function sendAsset(){
 		var deferred = $q.defer();
 		var flag = true;

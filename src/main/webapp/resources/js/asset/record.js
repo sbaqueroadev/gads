@@ -1,5 +1,5 @@
 /**
- * 
+ * Asset Record Angular App
  */
 var assetRecordApp = angular.module("assetRecordApp", []);
 

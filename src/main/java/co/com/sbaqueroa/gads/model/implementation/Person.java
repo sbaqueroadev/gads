@@ -22,24 +22,32 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * @author sergio
- * .
- *
+ * Implementation of Person Model.
  */
 @Entity
 @Table(name="person")
 public class Person {
+	/**
+	 * Person id.
+	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id",nullable=false,updatable=false)
 	private int id;
+	/**
+	 * Person name.
+	 */
 	@Column(name="name",columnDefinition="VARCHAR(45)",nullable=false)
 	private String name;
+	/**
+	 * Person assigned assets.
+	 */
 	@OneToMany(mappedBy="person",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JsonIgnore
 	private Set<AssignedAsset> assignedAssets = new HashSet<AssignedAsset>();
 
 	/**
-	 * 
+	 * Super class constructor.
 	 */
 	public Person() {
 		super();

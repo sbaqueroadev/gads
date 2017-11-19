@@ -1,5 +1,5 @@
 /**
- * 
+ * Person Record Angular App
  */
 var personRecordApp = angular.module("personRecordApp", []);
 

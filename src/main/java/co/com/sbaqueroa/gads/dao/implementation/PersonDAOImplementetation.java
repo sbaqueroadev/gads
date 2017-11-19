@@ -19,12 +19,14 @@ import co.com.sbaqueroa.gads.model.implementation.Person;
 
 /**
  * @author sergio
- * .
- *
+ * Person DAO implementation.
  */
 @Repository
 public class PersonDAOImplementetation implements PersonDAO {
 
+	/**
+	 * Hibernate's entity manager.
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 	
@@ -40,6 +42,9 @@ public class PersonDAOImplementetation implements PersonDAO {
 	    return entityManager.createQuery(cq).getResultList();
 	}
 
+	/* (non-Javadoc)
+	 * @see co.com.sbaqueroa.gads.dao.PersonDAO#getById(co.com.sbaqueroa.gads.model.implementation.Person)
+	 */
 	@Override
 	@Transactional
 	public Person getById(Person person) throws Exception {

@@ -18,13 +18,16 @@ import co.com.sbaqueroa.gads.model.implementation.AssignedAsset;
 
 /**
  * @author sergio
- * .
+ * Assigned asset DAO implementation.
  *
  */
 @Repository
 public class AsignedAssetDAOImplementation implements AssignedAssetDAO {
 
 	
+	/**
+	 * Hibernate's entity manager.
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 	
