@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import co.com.sbaqueroa.gads.services.AssetImpl;
+import co.com.sbaqueroa.gads.webservices.HomeController;
 
 /**
  * @author sergio
@@ -31,6 +32,7 @@ import co.com.sbaqueroa.gads.services.AssetImpl;
 
 public class GdasApplication extends SpringBootServletInitializer{
 
+	private static final Logger logger = LoggerFactory.getLogger(GdasApplication.class);
 	
 	/**
 	 * Runs the Spring App.
@@ -38,6 +40,7 @@ public class GdasApplication extends SpringBootServletInitializer{
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(GdasApplication.class, args);
+		logger.info("starting App");
 	}
 	
 	/* (non-Javadoc)
