@@ -3,6 +3,8 @@ package co.com.sbaqueroa.gads;
 import java.util.Locale;
 
 import org.springframework.context.annotation.Bean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -13,6 +15,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
+import co.com.sbaqueroa.gads.webservices.HomeController;
+
 /**
  * @author sergio
  * Spring MVC Configuration
@@ -21,12 +25,15 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
     
+	private static final Logger logger = LoggerFactory.getLogger(MvcConfiguration.class);
+	
 	/* (non-Javadoc)
 	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#configureViewResolvers(org.springframework.web.servlet.config.annotation.ViewResolverRegistry)
 	 */
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		super.configureViewResolvers(registry);
+		logger.info("Setting view resolver...");
 		registry.jsp("/WEB-INF/views/", ".jsp");
 	}
 	

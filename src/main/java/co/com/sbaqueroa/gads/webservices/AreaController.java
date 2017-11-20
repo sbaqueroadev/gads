@@ -37,10 +37,13 @@ public class AreaController {
 	 */
 	@RequestMapping(value = "/area", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<?> home() {
+		logger.info("/area controller, get method. get all");
 		List<Area> result = areaImpl.getAll();
-		if(result.size()>0)
+		if(result.size()>0){
+			logger.info("Getting "+result.size()+ " areas");
 			return ResponseEntity.ok(result);
-		else{
+		}else{
+			logger.warn("No data");
 			return ResponseEntity.status(404).body(new JSONObject()
 					.put("result", "fail")
 					.put("msg", "No data").toString());
@@ -52,6 +55,7 @@ public class AreaController {
 	 */
 	@RequestMapping(value="/area/home",method = {RequestMethod.GET})
 	public ModelAndView form(){
+		logger.info("/area/home controller, get record view");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("area/record");
 		List<Area> data =  areaImpl.getAll();
