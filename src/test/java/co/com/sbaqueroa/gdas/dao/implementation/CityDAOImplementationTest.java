@@ -43,7 +43,7 @@ public class CityDAOImplementationTest {
 	@Test
 	public void test() {
 		try {
-			assertEquals(1,cityDAO.getAll().size());
+			assertEquals(0,cityDAO.getAll().size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
