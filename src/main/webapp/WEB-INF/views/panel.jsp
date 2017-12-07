@@ -19,24 +19,6 @@
   <div id="chat-section" ng-controller="chatController"> 
     <div id="chat-record">
       <div class="row" ng-repeat="message in messages track by $index">
-<<<<<<< Upstream, based on origin/sockets
-        <div class="chat-record-message">
-          <p>{{message.msg}}</p>
-        </div>
-      </div>
-    </div>
-    <div id="chat-input">
-      <div class="row">
-        <div class="col-md-9 form-group">
-          <textarea ng-model="newMessage"></textarea>
-        </div>
-        <div class="col-md-3 form-group">
-          <button class="btn btn-success" ng-click="sendMessage()" value="Enviar"/>
-        </div>
-      </div>
-    </div>
-    <div id="videoButtons" ng-click="openCloseVideo()"></div>
-=======
         <div class="chat-record-message {{message.sender}}">
           <p>{{message.msg}}</p>
         </div>
@@ -53,7 +35,6 @@
       </div>
     </div>
     <div class="chat-opener" ng-click="openCloseChat()"> << </div>
->>>>>>> adaadf6 Integrated Chat, video and board with style.
   </div>
   <!--VIDEO-->
   <div ng-controller="videoController"> 

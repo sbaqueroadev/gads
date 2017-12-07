@@ -266,22 +266,6 @@ classApp.controller('videoController',function($scope){
 classApp.controller('chatController',function($scope){
 
   $scope.stompClient = null;
-<<<<<<< Upstream, based on origin/sockets
-  $scope.messages = [{msg: "Buenas tardes",sender:'student'},{msg: "Buenas tardes Sergio",sender:'teacher'},{msg: "En qué le puedo ayudar?",sender:'teacher'}];
-
-  $scope.connect = function() {
-      var socket = new SockJS('http://localhost:8081/GASD/write');
-      $scope.stompClient = Stomp.over(socket);
-      $scope.stompClient.connect({}, function (frame) {
-          //setConnected(true);
-          console.log('Connected: ' + frame);
-          $scope.stompClient.subscribe('/topic/reading', function (data) {
-             console.log(data.body);
-             $scope.messages.push(JSON.parse(data.body));
-             $scope.aux="";
-          });
-      });
-=======
   $scope.chatViewStatus = 0;
   $scope.messages = [{msg: "Buenas tardes",sender:'student'},{msg: "Buenas tardes Sergio",sender:'teacher'},{msg: "En qué le puedo ayudar?",sender:'teacher'}];
   $scope.openCloseChat = function(){
@@ -317,7 +301,6 @@ classApp.controller('chatController',function($scope){
 
   $scope.updateMessages = function(msgJSON){
     $scope.messages.push(JSON.parse(msgJSON));
->>>>>>> adaadf6 Integrated Chat, video and board with style.
   }
 
   $scope.disconnect = function() {
