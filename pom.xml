@@ -191,9 +191,19 @@
 			<version>3.2.1</version>
 		</dependency>
 		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>webrtc-adapter.js</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>web-socket-js</artifactId>
 			<version>10410eb45a</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>angular</artifactId>
+			<version>1.6.7-1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>

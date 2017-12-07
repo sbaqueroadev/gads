@@ -13,7 +13,7 @@ public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfig
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
 		//super.configureMessageBroker(registry);
 		registry.enableSimpleBroker("/topic");
-		registry.setApplicationDestinationPrefixes("/video","/chat");
+		registry.setApplicationDestinationPrefixes("/video","/chat","/board");
 	}
 	
 	
@@ -21,6 +21,7 @@ public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfig
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		registry.addEndpoint("/show").withSockJS();
 		registry.addEndpoint("/write").withSockJS();
+		registry.addEndpoint("/boardUpdate").withSockJS();
 	}
 
 }
