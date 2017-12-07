@@ -1,3 +1,5 @@
+/**********************************BOARD********************************************/
+
 html{
     width:100%;
     height:100%;
@@ -65,6 +67,8 @@ canvas {
     border-color: rgba(100,100,100,0.2);
 }
 
+/**********************************VIDEO********************************************/
+
 #localVideo{
     width:50px;
     height:auto;
@@ -91,4 +95,22 @@ canvas {
     top:10px;
     right:10px;
     display:none;
+}
+
+/**********************************CHAT********************************************/
+
+#chat-section{
+    width:400px;
+    height:100vh;
+    position:fixed;
+    top:0;
+    right:0;
+}
+
+#chat-input{
+    height:20%;
+}
+
+#chat-record{
+    height:80%;
 }

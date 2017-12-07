@@ -15,7 +15,7 @@ public class ChatController {
 	@MessageMapping("/write")
 	@SendTo("/topic/reading")
 	public String gettingData(String data) throws Exception{
-		return data+" received";
+		return data;
 	}
 	
 }

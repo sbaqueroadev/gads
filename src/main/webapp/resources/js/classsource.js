@@ -266,3 +266,40 @@ classApp.controller('videoController',function($scope){
 });
 
 /******************************************************************************************/
+/********************************************CHAT*****************************************/
+classApp.controller('chatController',function($scope){
+
+  $scope.stompClient = null;
+  $scope.messages = [{msg: "Buenas tardes",sender:'student'},{msg: "Buenas tardes Sergio",sender:'teacher'},{msg: "En qué le puedo ayudar?",sender:'teacher'}];
+
+  $scope.connect = function() {
+      var socket = new SockJS('http://localhost:8081/GASD/write');
+      $scope.stompClient = Stomp.over(socket);
+      $scope.stompClient.connect({}, function (frame) {
+          //setConnected(true);
+          console.log('Connected: ' + frame);
+          $scope.stompClient.subscribe('/topic/reading', function (data) {
+             console.log(data.body);
+             $scope.messages.push(JSON.parse(data.body));
+             $scope.aux="";
+          });
+      });
+  }
+
+  $scope.disconnect = function() {
+      if ($scope.stompClient !== null) {
+          $scope.stompClient.disconnect();
+      }
+      console.log("Disconnected");
+  }
+
+  $scope.sendMessage = function() {
+      if($scope.newMessage)
+        if($scope.newMessage!=null && $scope.newMessage!="")
+          $scope.stompClient.send("/chat/write", {}, JSON.stringify({msg: ""+$scope.newMessage,sender:'student'}));
+      $scope.newMessage = "";
+  }
+
+  $scope.connect();
+
+});
