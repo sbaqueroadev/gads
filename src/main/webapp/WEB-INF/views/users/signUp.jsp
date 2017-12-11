@@ -7,7 +7,7 @@
 <title>Login</title>
 </head>
 <body>
-<form action="../users/sign-up" method="get">
+<form action="../users/sign-up" method="post">
 User:<input type="text" name="user"/><br>
 Pass:<input type="text" name="pass"/>
 <input type="submit" value="Send">

@@ -22,7 +22,7 @@ public class UserController {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    @RequestMapping(value = "/users/sign-up", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/sign-up", method = RequestMethod.POST)
     public String signUp(@RequestParam("user") String userS
     		,@RequestParam("pass") String pass) {
     	ApplicationUser user = new ApplicationUser();

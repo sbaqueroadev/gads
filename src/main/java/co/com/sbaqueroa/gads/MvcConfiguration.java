@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
@@ -45,6 +46,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         configurer.enable();
     } 
     
+   
     /********************* WEBJARS *****************************************/
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
