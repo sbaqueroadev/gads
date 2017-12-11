@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,12 +14,13 @@
 </head>
 <body>
 	<header>
-	<h2 class="title">Bienvenido</h2>
-	<%@include  file="menu.html" %>
+	<spring:message code="custom.language"/> : <a href="?lang=en"><spring:message code="language.english"/></a> | <a href="?lang=es"><spring:message code="language.spanish"/></a>
+	<h2 class="title"><spring:message code="welcome.title"/></h2>
+	<jsp:include page="menu.jsp"></jsp:include>
 	</header>
 	<div id="content" class="row">
 	<p class="description col-md-offset-1 col-md-10">
-	Seleccione una de las secciones del menú principal.
+	<spring:message code="welcome.description"/>
 	</p>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"

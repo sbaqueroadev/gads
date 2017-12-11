@@ -2,13 +2,14 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Sergio Baquero - Activo</title>
+<title>Sergio Baquero - <spring:message code="menu.assets"/></title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -17,31 +18,32 @@
 </head>
 <body>
 	<header>
-	<h2 class="title">Listado de activos</h2>
-	<%@include file="../home/menu.html"%> </header>
+	<spring:message code="custom.language"/> : <a href="?lang=en"><spring:message code="language.english"/></a> | <a href="?lang=es"><spring:message code="language.spanish"/></a>
+	<h2 class="title"><spring:message code="asset.search.title"/></h2>
+	<jsp:include page="../home/menu.jsp"></jsp:include> </header>
 	<div id="content" ng-app='assetRecordApp'
 		ng-controller="recordListCtrlr" ng-init='records = []' class="row">
 		<div class="col-md-offset-2 col-md-4">
-			<label for="asset"> Serial: </label> <select class="form-control"
+			<label for="asset"> <spring:message code="asset.serial"/>: </label> <select class="form-control"
 				name="serial" data-ng-model="serial"
 				data-ng-options="record.serial for record in records">
 				<!-- <option ng-repeat="customer in customers" value="{{customer.name}}">{{customer.name}}</option>-->
 			</select>
 		</div>
 		<div class="col-md-4">
-			<label for="asset"> Tipo: </label> <select class="form-control"
+			<label for="asset"> <spring:message code="asset.type"/>: </label> <select class="form-control"
 				name="type" data-ng-model="type"
 				data-ng-options="record.type for record in records">
 				<!-- <option ng-repeat="customer in customers" value="{{customer.name}}">{{customer.name}}</option>-->
 			</select>
 		</div>
 		<div class="col-md-offset-2 col-md-4">
-			<label for="dateFrom"> From: </label> <input class="form-control"
+			<label for="dateFrom"> <spring:message code="custom.from"/>: </label> <input class="form-control"
 				type="date" name="dateFrom" ng-model="dateFrom"
 				value="<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>" />
 		</div>
 		<div class="col-md-4">
-			<label for="dateTo"> To: </label> <input class="form-control"
+			<label for="dateTo"> <spring:message code="custom.to"/>: </label> <input class="form-control"
 				type="date" name="dateTo" ng-model="dateTo"
 				value="<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>" />
 		</div>
@@ -52,26 +54,26 @@
 
 				<thead>
 					<tr>
-						<td>Nombre</td>
-						<td>Serial</td>
-						<td>Tipo</td>
-						<td>Estado</td>
-						<td>Número de inventario</td>
-						<td>Fecha de compra</td>
-						<td>Valor de compra</td>
-						<td>Color</td>
-						<td>Ancho</td>
-						<td>Largo</td>
-						<td>Alto</td>
-						<td>Peso</td>
-						<td>Fecha de baja</td>
+						<td><spring:message code="asset.name"/></td>
+						<td><spring:message code="asset.serial"/></td>
+						<td><spring:message code="asset.type"/></td>
+						<td><spring:message code="asset.status"/></td>
+						<td><spring:message code="asset.inventoryNumber"/></td>
+						<td><spring:message code="asset.buyDate"/></td>
+						<td><spring:message code="asset.buyPrice"/></td>
+						<td><spring:message code="asset.color"/></td>
+						<td><spring:message code="asset.width"/></td>
+						<td><spring:message code="asset.length"/></td>
+						<td><spring:message code="asset.height"/></td>
+						<td><spring:message code="asset.weight"/></td>
+						<td><spring:message code="asset.withDDate"/></td>
 					</tr>
 				</thead>
 
 				<tbody>
 					<c:if test="${empty data}">
 						<tr>
-							<td colspan="13">No hay activos registrados</td>
+							<td colspan="13"><spring:message code="custom.noData"/></td>
 						</tr>
 					</c:if>
 					<c:if test="${not empty data}">

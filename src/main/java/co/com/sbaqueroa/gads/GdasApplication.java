@@ -1,6 +1,9 @@
 package co.com.sbaqueroa.gads;
 
 import org.eclipse.jdt.internal.compiler.batch.Main;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +18,9 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import co.com.sbaqueroa.gads.services.AssetImpl;
+import co.com.sbaqueroa.gads.webservices.HomeController;
+
 /**
  * @author sergio
  * Project Main class which contains some basic configuration
@@ -27,6 +33,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 public class GdasApplication extends SpringBootServletInitializer{
 
+	private static final Logger logger = LoggerFactory.getLogger(GdasApplication.class);
 	
 	/**
 	 * Runs the Spring App.
@@ -34,6 +41,7 @@ public class GdasApplication extends SpringBootServletInitializer{
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(GdasApplication.class, args);
+		logger.info("starting App");
 	}
 	
 	/* (non-Javadoc)
