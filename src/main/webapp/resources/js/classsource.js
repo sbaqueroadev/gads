@@ -3,11 +3,11 @@ var classApp = angular.module('classApp',[]);
 /************************BOARD***************************************/
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
-const clearButton = document.querySelector('#clear');
 const localVideo = document.getElementById('localVideo');
 const remoteVideo = document.getElementById('remoteVideo');
 const videoButtons = document.getElementById('videoButtons');
-
+const chatSection = document.getElementById('chat-section');
+const chatOpeners = $('.chat-opener');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -116,15 +116,7 @@ classApp.controller('boardController',function($scope){
     canvas.addEventListener('mouseup', $scope.sendCanvas);
     canvas.addEventListener('mouseout', () => $scope.isDrawing = false );
 
-    $scope.clear = function() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      $scope.sendInfo({type:'clear'});
-    };
-
-    clearButton.addEventListener('click', $scope.clear);
     $scope.connect();
-
-    $('.tool').on('click',$scope.selectTool);
 
     $scope.selectTool = function(tool){
         switch(tool){
@@ -136,6 +128,10 @@ classApp.controller('boardController',function($scope){
             case 'erase':
                 $scope.lineWidth = 20;
                 $scope.lightness = '100%';
+            break;
+            case 'clear':
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                $scope.sendInfo({type:'clear'});
             break;
         }
     };
@@ -256,7 +252,7 @@ classApp.controller('videoController',function($scope){
     $(remoteVideo).animate({
       width:newWidth//,
       //opacity:newOpacity[1]
-    },1000);
+    },500);
     /*$(videoButtons).animate({
       opacity:newOpacity[0]
     },2000);*/
@@ -270,6 +266,7 @@ classApp.controller('videoController',function($scope){
 classApp.controller('chatController',function($scope){
 
   $scope.stompClient = null;
+<<<<<<< Upstream, based on origin/sockets
   $scope.messages = [{msg: "Buenas tardes",sender:'student'},{msg: "Buenas tardes Sergio",sender:'teacher'},{msg: "En qué le puedo ayudar?",sender:'teacher'}];
 
   $scope.connect = function() {
@@ -284,6 +281,43 @@ classApp.controller('chatController',function($scope){
              $scope.aux="";
           });
       });
+=======
+  $scope.chatViewStatus = 0;
+  $scope.messages = [{msg: "Buenas tardes",sender:'student'},{msg: "Buenas tardes Sergio",sender:'teacher'},{msg: "En qué le puedo ayudar?",sender:'teacher'}];
+  $scope.openCloseChat = function(){
+    var aux = $scope.chatViewStatus;
+    var newRightPost = $scope.chatViewStatus==0?0:-400;
+    $(chatSection).animate({
+      right:newRightPost
+    },500,function(){
+      $scope.chatViewStatus = $scope.chatViewStatus==0?1:0;
+    });
+    $(chatOpeners).animate({
+      right:(newRightPost+400)
+    },500,function(){
+      if(aux==1)
+        $(chatOpeners).html(' << ');  
+      else
+        $(chatOpeners).html(' >> ');
+    });
+  };
+
+  $scope.connect = function() {
+      var socket = new SockJS('http://localhost:8081/GASD/write');
+      $scope.stompClient = Stomp.over(socket);
+      $scope.stompClient.connect({}, function (frame) {
+          //setConnected(true);
+          console.log('Connected: ' + frame);
+          $scope.stompClient.subscribe('/topic/reading', function (data) {
+             console.log(data.body);
+             $scope.updateMessages(data.body);
+          });
+      });
+  }
+
+  $scope.updateMessages = function(msgJSON){
+    $scope.messages.push(JSON.parse(msgJSON));
+>>>>>>> adaadf6 Integrated Chat, video and board with style.
   }
 
   $scope.disconnect = function() {
