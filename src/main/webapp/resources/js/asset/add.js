@@ -4,7 +4,7 @@
 var assetAddApp = angular.module("assetAddApp", []);
 
 /************************ LIST CONTROLLER****************************************/
-assetAddApp.controller("assetAddCtrlr", ['$scope','$q','$http',function($scope,$q,$http) {
+assetAddApp.controller("assetAddCtrlr", ['$scope','$q','$http','$window',function($scope,$q,$http, $window) {
 	$scope.asset = {};
 	/************************ SEND DATA PROCESS****************************************/
 	$scope.send = function(){
@@ -26,6 +26,9 @@ assetAddApp.controller("assetAddCtrlr", ['$scope','$q','$http',function($scope,$
 			deferred.resolve(response.data);
 		},
 		function error(response){
+			if(response.status=403)
+				$window.location.href = '../users/create';
+				//$location.path('../users/access');
 			deferred.resolve();//[{id:1,name:"P1"}]);
 		});
 		return deferred.promise;
