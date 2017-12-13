@@ -15,12 +15,14 @@ import co.com.sbaqueroa.gads.model.implementation.City;
 
 /**
  * @author sergio
- * .
- *
+ * City services.
  */
 @Service
 public class CityImpl implements CityInterface {
 
+	/**
+	 * Connection with DAO.
+	 */
 	@Autowired
 	private CityDAO cityDAO;
 	

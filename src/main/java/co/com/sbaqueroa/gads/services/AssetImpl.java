@@ -16,12 +16,15 @@ import co.com.sbaqueroa.gads.model.implementation.Asset;
 
 /**
  * @author sergio
- * .
+ * Asset Services.
  *
  */
 @Service
 public class AssetImpl implements AssetInterface {
 
+	/**
+	 * Connection with DAO.
+	 */
 	@Autowired
 	private AssetDAO assetDAO;
 	

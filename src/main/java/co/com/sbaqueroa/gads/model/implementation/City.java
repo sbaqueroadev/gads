@@ -12,20 +12,26 @@ import javax.persistence.Table;
 
 /**
  * @author sergio
- * .
+ * Implementation of City Model.
  *
  */
 @Entity
 @Table(name="city")
 public class City {
+	/**
+	 * City id.
+	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id",nullable=false,updatable=false)
 	private int id;
+	/**
+	 * City name.
+	 */
 	@Column(name="name",columnDefinition="VARCHAR(45)",nullable=false)
 	private String name;
 	/**
-	 * 
+	 * Super class constructor
 	 */
 	public City() {
 		super();

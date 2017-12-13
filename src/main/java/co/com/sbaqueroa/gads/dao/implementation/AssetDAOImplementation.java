@@ -21,13 +21,16 @@ import co.com.sbaqueroa.gads.model.implementation.Asset;
 
 /**
  * @author sergio
- * .
+ * Person DAO implementation.
  *
  */
 @Repository
 public class AssetDAOImplementation implements AssetDAO {
 
 	
+	/**
+	 * Hibernate's entity manager.
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 	
@@ -71,8 +74,9 @@ public class AssetDAOImplementation implements AssetDAO {
 	 * @see co.com.sbaqueroa.gads.dao.AssetDAO#update(co.com.sbaqueroa.gads.model.implementation.Asset)
 	 */
 	@Override
+	@Transactional(readOnly=false)
 	public Asset update(Asset asset) throws Exception {
-		entityManager.refresh(asset);
+		entityManager.merge(asset);
 		entityManager.flush();
 		return asset;
 	}

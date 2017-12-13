@@ -18,12 +18,14 @@ import co.com.sbaqueroa.gads.model.implementation.City;
 
 /**
  * @author sergio
- * .
- *
+ * City DAO implementation.
  */
 @Repository
 public class CityDAOImplementetation implements CityDAO {
 
+	/**
+	 * Hibernate's entity manager.
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 	
