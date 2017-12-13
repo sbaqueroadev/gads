@@ -6,11 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login</title>
 </head>
-<body>
-<form action="../login" method="post">
-User:<input type="text" name="username"/><br>
-Pass:<input type="text" name="password"/>
-<input type="submit" value="Send">
+<body ng-app="loginApp">
+<form action="../login" method="post" ng-controller="loginController" ng-submit="login($event)">
+Usuario:<input type="text" ng-model="user.username" name="username"/><br>
+Contraseña:<input type="text" ng-model="user.password" name="password"/>
+<input type="submit" value="Enviar">
 </form>
+<script type="text/javascript" src="../webjars/jquery/3.2.1/jquery.js"></script>
+  <script type="text/javascript" src="../webjars/angular/1.6.7-1/angular.js"></script>
+
+  <script src="../resources/js/users/login.js" type="text/javascript"></script>
 </body>
 </html>
