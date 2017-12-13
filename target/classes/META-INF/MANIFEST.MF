@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: GDAS
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: sergio
+Built-By: Grupo ASD
 Implementation-Vendor-Id: co.com.sbaqueroa
 Build-Jdk: 1.8.0_151
 Implementation-URL: http://projects.spring.io/spring-boot/GDAS/
