@@ -300,7 +300,9 @@ classApp.controller('chatController',function($scope){
   }
 
   $scope.updateMessages = function(msgJSON){
-    $scope.messages.push(JSON.parse(msgJSON));
+	  $scope.$apply(function(){
+		  $scope.messages.push(JSON.parse(msgJSON));
+	  });
   }
 
   $scope.disconnect = function() {
