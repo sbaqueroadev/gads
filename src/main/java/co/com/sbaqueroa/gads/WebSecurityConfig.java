@@ -34,7 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET,"/users/access","/users/create","/error"
 				,"/resources/**","/webjars/**").permitAll()
 		.antMatchers(HttpMethod.POST,"/users/sign-up").permitAll()
-		.anyRequest().authenticated()
+		.anyRequest().hasAnyAuthority("READ_PRIVILEGE","ROLE_ADMIN")
+		.and()
+		.formLogin()
+		.loginPage("/users/access")
 		.and()
 		.addFilterAt(new JWTAuthenticationFilter(authenticationManager()),UsernamePasswordAuthenticationFilter.class)
 		.addFilter(new JWTAuthorizationFilter(authenticationManager()))

@@ -7,7 +7,9 @@ import static co.com.sbaqueroa.gads.security.SecurityConstants.TOKEN_PREFIX;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -15,11 +17,15 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
@@ -66,14 +72,26 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 			token = response.getHeader(HEADER_STRING);*/
 		if (token != null) {
 			// parse the token.
-			String user = Jwts.parser()
+			Claims claims = Jwts.parser()
 					.setSigningKey(SECRET.getBytes())
 					.parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
-					.getBody()
+					.getBody();
+			String user = claims
 					.getSubject();
+			Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+			JSONArray jwtAuthorities;
+			try {
+				jwtAuthorities = new JSONArray((String) claims.get("Authorities"));
+				for( int i = 0 ; i< jwtAuthorities.length(); i++ ){
+					authorities.add(new SimpleGrantedAuthority(jwtAuthorities.getString(i)));
+				}
+			} catch (ParseException e) {
+				throw new UnsupportedEncodingException("Bad credentials in Token");
+			}
+			 
 
 			if (user != null) {
-				return new UsernamePasswordAuthenticationToken(user, null,new ArrayList<>());
+				return new UsernamePasswordAuthenticationToken(user, null, authorities);
 			}
 			return null;
 		}
