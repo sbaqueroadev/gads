@@ -52,7 +52,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 		UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		chain.doFilter(req, res);
-		System.out.println("c"+res.getStatus());
+		//System.out.println("c"+res.getStatus());
 	}
 
 	private String getCookieValue(HttpServletRequest req, String headerString) throws UnsupportedEncodingException {

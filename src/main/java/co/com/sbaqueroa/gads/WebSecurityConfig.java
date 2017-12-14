@@ -34,10 +34,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET,"/users/access","/users/create","/error"
 				,"/resources/**","/webjars/**").permitAll()
 		.antMatchers(HttpMethod.POST,"/users/sign-up").permitAll()
-		.anyRequest().hasAnyAuthority("READ_PRIVILEGE","ROLE_ADMIN")
+		.antMatchers(HttpMethod.GET,"/class/**").hasAnyAuthority("TEACH_CLASS_PRIVILEGE",
+				"VIEW_CLASS_PRIVILEGE")
+		.antMatchers(HttpMethod.POST,"/class/**").hasAnyAuthority("TEACH_CLASS_PRIVILEGE",
+				"VIEW_CLASS_PRIVILEGE")
+		.anyRequest().hasAnyAuthority("READ_PRIVILEGE","WRITE_PRIVILEGE")
 		.and()
 		.formLogin()
 		.loginPage("/users/access")
+		.loginProcessingUrl("/login")
 		.and()
 		.addFilterAt(new JWTAuthenticationFilter(authenticationManager()),UsernamePasswordAuthenticationFilter.class)
 		.addFilter(new JWTAuthorizationFilter(authenticationManager()))

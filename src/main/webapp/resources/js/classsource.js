@@ -313,7 +313,7 @@ classApp.controller('chatController',function($scope){
   $scope.sendMessage = function() {
       if($scope.newMessage)
         if($scope.newMessage!=null && $scope.newMessage!="")
-          $scope.stompClient.send("/chat/write", {}, JSON.stringify({msg: ""+$scope.newMessage,sender:'student'}));
+          $scope.stompClient.send("/chat/write", {}, JSON.stringify({msg: ""+$scope.newMessage,sender:''+globalRole+''}));
       $scope.newMessage = "";
   }
 

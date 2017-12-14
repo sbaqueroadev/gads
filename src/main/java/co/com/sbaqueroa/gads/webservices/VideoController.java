@@ -35,7 +35,7 @@ public class VideoController {
 	@MessageMapping("/show")
 	@SendTo("/topic/view")
 	public Object gettingData(Object data) throws Exception{
-		System.out.println("Video data received"+data.toString());
+		//System.out.println("Video data received"+data.toString());
 		return data;
 	}
 	

@@ -23,6 +23,7 @@ loginApp.controller("loginController", ['$scope','$q','$http','$window',function
 				$scope.asset={};
 				$("#addAssetForm").trigger("reset");*/
 				alert("Login correctly!");
+				$window.location.href = '../board/home';
 			/*}else
 				alert("Error. Try later please.");*/
 			deferred.resolve(response.data);

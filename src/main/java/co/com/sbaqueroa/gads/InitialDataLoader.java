@@ -49,26 +49,39 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
           = createPrivilegeIfNotFound("READ_PRIVILEGE");
         Privilege writePrivilege
           = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
+        Privilege teachClassPrivilege
+        = createPrivilegeIfNotFound("TEACH_CLASS_PRIVILEGE");
+        Privilege viewClassPrivilege
+        = createPrivilegeIfNotFound("VIEW_CLASS_PRIVILEGE");
   
         List<Privilege> adminPrivileges = Arrays.asList(
-          readPrivilege, writePrivilege);        
+          readPrivilege, writePrivilege);
+        List<Privilege> teacherPrivileges = Arrays.asList(
+                readPrivilege, writePrivilege, teachClassPrivilege);        
+        List<Privilege> studentPrivileges = Arrays.asList(
+                readPrivilege, writePrivilege, viewClassPrivilege);
         createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
+        createRoleIfNotFound("ROLE_TEACHER", teacherPrivileges);
+        createRoleIfNotFound("ROLE_STUDENT", studentPrivileges);
         createRoleIfNotFound("ROLE_USER", (Collection<Privilege>) Arrays.asList(readPrivilege));
  
         Role adminRole = roleRepository.findByName("ROLE_ADMIN");
         Role userRole = roleRepository.findByName("ROLE_USER");
+        Role teacherRole = roleRepository.findByName("ROLE_TEACHER");
+        Role studentRole = roleRepository.findByName("ROLE_STUDENT");
         ApplicationUser user = new ApplicationUser();
-        user.setPassword(bCryptPasswordEncoder.encode("test"));
-        user.setUsername("test");
-        user.setEmail("test@test.com");
-        user.setRole(adminRole);
-        applicationUserRepository.save(user);
+        user.setPassword(bCryptPasswordEncoder.encode("teacher"));
+        user.setUsername("teacher");
+        user.setEmail("teacher@test.com");
+        user.setRole(teacherRole);
+        createUserIfNotFound(user);
+        //applicationUserRepository.save(user);
         ApplicationUser user2 = new ApplicationUser();
-        user2.setPassword(bCryptPasswordEncoder.encode("test2"));
-        user.setUsername("test2");
-        user2.setEmail("test2@test.com");
-        user.setRole(userRole);
-        applicationUserRepository.save(user);
+        user2.setPassword(bCryptPasswordEncoder.encode("student"));
+        user2.setUsername("student");
+        user2.setEmail("student@test.com");
+        user2.setRole(studentRole);
+        createUserIfNotFound(user2);
  
         alreadySetup = true;
     }
@@ -95,5 +108,17 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
             roleRepository.save(role);
         }
         return role;
+    }
+    
+    @Transactional
+    private ApplicationUser createUserIfNotFound(
+      ApplicationUser appUser) {
+  
+        ApplicationUser user = applicationUserRepository.findByUsername(appUser.getUsername());
+        if (user == null) {
+            user = appUser;
+            applicationUserRepository.save(user);
+        }
+        return user;
     }
 }
